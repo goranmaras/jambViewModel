@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/root_playYamb_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageButton
+            android:id="@+id/btnRoll"
+            android:layout_width="156dp"
+            android:layout_height="77dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="32dp"
+            android:text="Roll Dice"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivDice5" />
+
+        <ImageView
+            android:id="@+id/ivDice2"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="100dp"
+            android:clickable="true"
+            android:contentDescription="@string/todo"
+            app:layout_constraintEnd_toStartOf="@+id/ivDice3"
+            app:layout_constraintHorizontal_bias="0.429"
+            app:layout_constraintStart_toEndOf="@+id/ivDice"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/img_list" />
+
+        <ImageView
+            android:id="@+id/ivDice3"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginEnd="24dp"
+            android:clickable="true"
+            android:contentDescription="@string/todo"
+            android:focusable="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/img_list" />
+
+        <ImageView
+            android:id="@+id/ivDice"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="100dp"
+            android:clickable="true"
+            android:contentDescription="@string/todo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/img_list" />
+
+        <ImageView
+            android:id="@+id/ivDice4"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="52dp"
+            android:clickable="true"
+            android:contentDescription="@string/todo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivDice"
+            app:srcCompat="@drawable/img_list" />
+
+        <ImageView
+            android:id="@+id/ivDice6"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="52dp"
+            android:layout_marginEnd="24dp"
+            android:clickable="true"
+            android:contentDescription="@string/todo"
+            android:focusable="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivDice3"
+            app:srcCompat="@drawable/img_list" />
+
+        <ImageView
+            android:id="@+id/ivDice5"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="52dp"
+            android:clickable="true"
+            android:contentDescription="@string/todo"
+            android:focusable="true"
+            app:layout_constraintEnd_toStartOf="@+id/ivDice6"
+            app:layout_constraintHorizontal_bias="0.429"
+            app:layout_constraintStart_toEndOf="@+id/ivDice4"
+            app:layout_constraintTop_toBottomOf="@+id/ivDice2"
+            app:srcCompat="@drawable/img_list" />
+
+        <Button
+            android:id="@+id/btnPassData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PassData"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnRoll" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

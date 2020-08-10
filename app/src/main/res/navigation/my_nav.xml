@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/fragmentPlayYamb">
+
+    <fragment
+    android:id="@+id/fragmentPlayYamb"
+    android:name="com.goranm.cubeassigmentfix.FragmentPlayYamb"
+    android:label="fragment_play_yamb"
+    tools:layout="@layout/fragment_play_yamb"
+    />
+
+    <fragment
+        android:id="@+id/paperFragment"
+        android:name="com.goranm.cubeassigmentfix.PaperFragment"
+        android:label="fragment_paper"
+        tools:layout="@layout/fragment_paper" />
+
+</navigation>

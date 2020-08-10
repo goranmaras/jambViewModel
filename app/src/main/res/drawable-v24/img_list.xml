@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<level-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@drawable/dice1"
+        android:minLevel="1"
+        android:maxLevel="1"
+        />
+    <item android:drawable="@drawable/dice2"
+        android:minLevel="2"
+        android:maxLevel="2"
+        />
+    <item android:drawable="@drawable/dice3"
+        android:minLevel="3"
+        android:maxLevel="3"
+        />
+    <item android:drawable="@drawable/dice4"
+        android:minLevel="4"
+        android:maxLevel="4"
+        />
+    <item android:drawable="@drawable/dice5"
+        android:minLevel="5"
+        android:maxLevel="5"
+        />
+    <item android:drawable="@drawable/dice6"
+        android:minLevel="6"
+        android:maxLevel="6"
+        />
+
+</level-list>
