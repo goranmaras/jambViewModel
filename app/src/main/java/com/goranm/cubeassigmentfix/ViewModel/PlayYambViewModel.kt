@@ -17,13 +17,15 @@ class PlayYambViewModel : ViewModel()  {
 
     private val TAG = "HEY"
 
+
+
     val cubesList = mutableListOf<Cube>(
-        Cube(false, 1),
-        Cube(false, 1),
-        Cube(false, 1),
-        Cube(false, 1),
-        Cube(false, 1),
-        Cube(false, 1)
+        Cube(false, 1, R.drawable.dice1),
+        Cube(false, 1, R.drawable.dice1),
+        Cube(false, 1, R.drawable.dice1),
+        Cube(false, 1, R.drawable.dice1),
+        Cube(false, 1, R.drawable.dice1),
+        Cube(false, 1, R.drawable.dice1)
     )
 
     private val _cubes = MutableLiveData<List<Cube>>(
@@ -33,35 +35,64 @@ class PlayYambViewModel : ViewModel()  {
     get() = _cubes
 
 
+    val picturesList = mutableMapOf<Int,Int>(
+        1 to R.drawable.dice1,
+        2 to R.drawable.dice2,
+        3 to R.drawable.dice3,
+        4 to R.drawable.dice4,
+        5 to R.drawable.dice5,
+        6 to R.drawable.dice6
+    )
 
-    private var canRollFirstTime = true
-    private var canRollSecondTime = false
-    private var canRollThirdTime = false
+    private val _pictures = MutableLiveData<Map<Int,Int>>(
+        picturesList
+    )
+    val pictures : LiveData<Map<Int,Int>>
+    get() = _pictures
 
 
+     var canRollFirstTime = true
+     var canRollSecondTime = false
+     var canRollThirdTime = false
 
-    fun onRollBtnClicked(imageView: List<ImageView>,btnPic: ImageButton){
-        if (canRollFirstTime){
-            for (i in imageView.indices){
-                imageView[i].setImageLevel(cubesList[i].rollRandomNumber())
+    val boolenList = mutableListOf<Boolean>(true,false,false,false)
+    private val _bools = MutableLiveData<List<Boolean>>( boolenList )
+    val bools : LiveData<List<Boolean>>
+    get() = _bools
+
+
+    fun onRollBtnClicked(){
+        if (boolenList[0]){
+            for (cube in cubesList){
+                cube.rollRandomNumber()
+                cube.pictureOfCube = picturesList[cube.diceNumber]!!
             }
-            canRollFirstTime = false
-            canRollSecondTime = true
-            btnPic.setImageResource(R.drawable.button_first_r)
-        }else if (canRollSecondTime){
-            for (i in imageView.indices){
-                imageView[i].setImageLevel(cubesList[i].secondRollCheck())
+            _cubes.value = cubesList
+
+            boolenList[0] = false
+            boolenList[1] = true
+            _bools.value = boolenList
+        }else if (boolenList[1]){
+            for (cube in cubesList){
+                cube.secondRollCheck()
+                cube.pictureOfCube = picturesList[cube.diceNumber]!!
             }
-            canRollSecondTime = false
-            canRollThirdTime = true
-            btnPic.setImageResource(R.drawable.button_second_r)
-        }else if (canRollThirdTime){
-            btnPic.setImageResource(R.drawable.button_third_r)
-            for (i in imageView.indices){
-                imageView[i].setImageLevel(cubesList[i].secondRollCheck())
+            _cubes.value = cubesList
+            boolenList[1] = false
+            boolenList[2] = true
+            _bools.value = boolenList
+        }else if (boolenList[2]){
+            for (cube in cubesList){
+                cube.secondRollCheck()
+                cube.pictureOfCube = picturesList[cube.diceNumber]!!
             }
+            _cubes.value = cubesList
+            boolenList[2]= false
+            boolenList[3]= true
+            _bools.value = boolenList
+        }else if (boolenList[3]){
+            _bools.value = boolenList
             resetingValues()
-           btnPic.isEnabled = false
         }
 
     }
@@ -71,11 +102,15 @@ class PlayYambViewModel : ViewModel()  {
         for (cube in cubesList){
             cube.diceNumber = 1
             cube.isDiceEnabled = false
+            cube.pictureOfCube = R.drawable.dice1
         }
 
-        canRollFirstTime = true
-        canRollSecondTime = false
-        canRollThirdTime = false
+
+        boolenList[0] = true
+        boolenList[1] = false
+        boolenList[2] = false
+        boolenList[3] = false
+        _bools.value = boolenList
     }
 
 

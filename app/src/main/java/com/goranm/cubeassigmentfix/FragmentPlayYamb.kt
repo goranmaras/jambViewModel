@@ -4,12 +4,11 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
+import android.widget.ImageButton
 import android.widget.ImageView
-import android.widget.Toast
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.goranm.cubeassigmentfix.ViewModel.PlayYambListener
+import com.goranm.cubeassigmentfix.ViewModel.PaperFragmentViewModel
 import com.goranm.cubeassigmentfix.ViewModel.PlayYambViewModel
 import com.goranm.factoryzadatak3.model.Cube
 import kotlinx.android.synthetic.main.fragment_play_yamb.*
@@ -20,22 +19,38 @@ class FragmentPlayYamb : Fragment(R.layout.fragment_play_yamb), View.OnClickList
     val TAG = "FirstFragment"
     private var listClicked = arrayListOf<Int>()
 
-    private val viewModel : PlayYambViewModel by activityViewModels()
 
+    lateinit var viewModel: PlayYambViewModel
+    lateinit var viewmodelTest: PaperFragmentViewModel
+    
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         initView()
         val listOfImages = listOf<ImageView>(ivDice,ivDice2,ivDice3,ivDice4,ivDice5,ivDice6)
+        val listOfBtnRollImages = listOf<Int>(R.drawable.button_first_r,R.drawable.button_second_r,R.drawable.button_third_r,R.drawable.button_start)
+
+        viewModel = ViewModelProvider(requireActivity()).get(PlayYambViewModel::class.java)
+        viewmodelTest = ViewModelProvider(requireActivity()).get(PaperFragmentViewModel::class.java)
+
+        viewModel.cubes.observe(viewLifecycleOwner, Observer {
+            displayImage(listOfImages,it)
+        })
+
+
+        viewModel.bools.observe(viewLifecycleOwner, Observer {
+            btnRollPictureChange(listOfBtnRollImages,it,btnRoll)
+        })
 
         btnRoll.setOnClickListener {
-            viewModel.onRollBtnClicked(listOfImages, btnRoll)
+            viewModel.onRollBtnClicked()
         }
 
 
-
         btnPassData.setOnClickListener {
-            Log.d(TAG, "onViewCreated: $listClicked")
+            val some = viewmodelTest.coloneRowDataMap
+            val somene = some.values
+            Log.d(TAG, "onViewCreated: ${somene.flatten()}")
         }
 
     }
@@ -60,32 +75,12 @@ class FragmentPlayYamb : Fragment(R.layout.fragment_play_yamb), View.OnClickList
 
     override fun onClick(v: View?) {
         when(v?.id){
-            R.id.ivDice -> {
-                viewModel.cubes.observe(viewLifecycleOwner, Observer { 
-                    it[0].isDiceEnabled = true
-                    listClicked.add(it[0].diceNumber)
-                })
-            }
-            R.id.ivDice2 -> {viewModel.cubes.observe(viewLifecycleOwner, Observer {
-                it[1].isDiceEnabled = true
-                listClicked.add(it[1].diceNumber)
-            })}
-            R.id.ivDice3 -> {viewModel.cubes.observe(viewLifecycleOwner, Observer {
-                it[2].isDiceEnabled = true
-                listClicked.add(it[2].diceNumber)
-            })}
-            R.id.ivDice4 -> {viewModel.cubes.observe(viewLifecycleOwner, Observer {
-                it[3].isDiceEnabled = true
-                listClicked.add(it[3].diceNumber)
-            })}
-            R.id.ivDice5 -> {viewModel.cubes.observe(viewLifecycleOwner, Observer {
-                it[4].isDiceEnabled = true
-                listClicked.add(it[4].diceNumber)
-            })}
-            R.id.ivDice6 -> {viewModel.cubes.observe(viewLifecycleOwner, Observer {
-                it[5].isDiceEnabled = true
-                listClicked.add(it[5].diceNumber)
-            })}
+            R.id.ivDice -> {viewModel.cubesList[0].isDiceEnabled = true }
+            R.id.ivDice2 -> {viewModel.cubesList[1].isDiceEnabled = true}
+            R.id.ivDice3 -> {viewModel.cubesList[2].isDiceEnabled = true}
+            R.id.ivDice4 -> {viewModel.cubesList[3].isDiceEnabled = true}
+            R.id.ivDice5 -> {viewModel.cubesList[4].isDiceEnabled = true}
+            R.id.ivDice6 -> {viewModel.cubesList[5].isDiceEnabled = true}
             else->{
                 return
             }
@@ -93,7 +88,29 @@ class FragmentPlayYamb : Fragment(R.layout.fragment_play_yamb), View.OnClickList
     }
 
 
+    fun displayImage(list: List<ImageView>, cubes : List<Cube>){
+        for (i in cubes.indices){
+            list[i].setImageResource(cubes[i].pictureOfCube)
+        }
+
+    }
+
+    fun btnRollPictureChange(list: List<Int>,bools: List<Boolean>, button: ImageButton){
+
+        if (bools[0]){
+            button.setImageResource(list[0])
+        }else if (bools[1]){
+            button.setImageResource(list[1])
+        }else if (bools[2]){
+            button.setImageResource(list[2])
+        }else if (bools[3]){
+            button.setImageResource(list[3])
+            button.isEnabled = false
+        }
 
 
+
+
+    }
 
 }

@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.single_item_input.view.*
 import kotlinx.android.synthetic.main.single_item_results.view.*
 import kotlin.math.log
 
-class AdapterGridLayout(private val list: List<DataWrapper>,
+class AdapterGridLayout(private val list: MutableMap<Int,List<DataWrapper>>,
                         val fm: FragmentManager?,
                         var listClicked : ArrayList<Int>,
                         val bottomSheet: BottomSheetDialog
@@ -108,17 +108,36 @@ class AdapterGridLayout(private val list: List<DataWrapper>,
     }
 
     override fun getItemViewType(position: Int): Int {
-        return list[position].layoutID
+
+       val valueList = list.values
+        val flattendList = valueList.flatten()
+
+
+        return flattendList[position].layoutID
     }
 
     override fun onBindViewHolder(holder: BaseViewHolder<Any>, position: Int) {
 
-        val element = list[position].data
-        holder.bind(element)
+        val valueList = list.values
+        val keyList = list.keys
+
+
+
+        val flattendList = valueList.flatten()
+
+        holder.bind(flattendList[position].data)
+
+
+    }
+
+
+    fun sortTheList(list: MutableMap<Int,List<DataWrapper>>, position: Int){
 
 
 
     }
+
+
 
     override fun getItemId(position: Int): Long {
         return super.getItemId(position)
